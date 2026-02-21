@@ -25,40 +25,119 @@
 
     <!-- Main Content -->
     <div class="content-wrapper">
-        <h1>Happy Birthday, Mum!</h1>
-        <div class="nav-hint">Click any section to explore ⬇️</div>
+        <!-- Home Page -->
+        <div id="home" class="page active">
+            <h1>Happy Birthday, Mum! 💖</h1>
+            <p>I've put together something special just for you...</p>
+            <button onclick="goToSection(1)">Let's Begin ✨</button>
+        </div>
 
-        <div id="main-message" class="section">
-    <p>Dear Mummy,</p>
-    <p>On your very special day, I felt that you might have needed a little message to show how much I really love you. And maybe that it is <strong>YOUR BIRTHDAY!</strong></p>
-    <p>You do everything for me, and I am really am grateful for everything you do for not only me, but Dad, Ollie, Grannie, Grandad, and even Ebony, Bear and Blackjack!</p>
-    <p>So please, take this day off, as you really deserve it.</p>
-    <p>But before we do that...</p>
-    <p>Lets take a trip...</p>
+        <!-- Section 1: Main Message -->
+        <div id="section1" class="page">
+            <div class="section">
+                <h2>Dear Mummy 💌</h2>
+                <p>On your very special day, I wanted to tell you how much I really love you.</p>
+                <p>You do absolutely everything for me, and I am so grateful for it all. You care for not just me, but Dad, Ollie, Grannie, Grandad, and even Ebony, Bear and Blackjack!</p>
+                <p>Today is YOUR DAY to relax and enjoy.</p>
+            </div>
+            <div class="button-container">
+                <button onclick="goToSection(2)">Continue →</button>
+            </div>
+        </div>
+
+        <!-- Section 2: Memories -->
+        <div id="section2" class="page">
+            <div class="section">
+                <h2>So Many Memories 📸</h2>
+                <p>We've done so much together! The beach, the park, the zoo, the cinema, the shops, the library, the museum, the aquarium, the farm...</p>
+                <p>There are too many amazing memories to count! Each moment with you is special and I'll never forget them.</p>
+            </div>
+            <div class="button-container">
+                <button onclick="goToSection(3)">Next →</button>
+            </div>
+        </div>
+
+        <!-- Section 3: Fun Times -->
+        <div id="section3" class="page">
+            <div class="section">
+                <h2>Time to Laugh! 😄</h2>
+                <p>Let me share some fun moments with you:</p>
+                <ul>
+                    <li>BUTTER CHICKEN!!! (you know why 🤣)</li>
+                    <li>Seven Hundred and Fifty Six</li>
+                    <li><strong>Ollie's joke:</strong> I ate a clock last week, it was very time-consuming!</li>
+                </ul>
+            </div>
+            <div class="button-container">
+                <button onclick="goToSection(4)">Keep Going →</button>
+            </div>
+        </div>
+
+        <!-- Section 4: Final Words -->
+        <div id="section4" class="page">
+            <div class="section">
+                <h2>Before the Big Moment 💝</h2>
+                <p>I hope you have the most wonderful birthday, filled with love and joy.</p>
+                <p>You are the best mum anyone could ask for, and you deserve all the happiness in the world today and every day.</p>
+            </div>
+            <div class="button-container">
+                <button onclick="goToSection(5)">The Best Part! 🎉</button>
+            </div>
+        </div>
+
+        <!-- Celebration Page -->
+        <div id="celebration" class="page">
+            <h1>HAPPY BIRTHDAY, MUM! 🎉</h1>
+            <div style="font-size: 4rem; animation: burst-out 1s ease-out;">
+                💕 💖 💗 💝 ❤️
+            </div>
+        </div>
     </div>
 
-    <div id="memories">
-        <p>Do you remember all the things we did together? Well I can't and I will tell you why!</p>
-        <p>Because there are so many things we have done together, that I can't remember them all! But I will try to remember some of them...</p>
-        <p>We have been to the beach, we have been to the park, we have been to the zoo, we have been to the cinema, we have been to the shops, we have been to the library, we have been to the museum, we have been to the aquarium, we have been to the farm, and we have been EVERYWHERE!</p>
-        <p><strong>So here are some pictures to jog your memory...</strong></p>
-    </div>
+    <script>
+        let currentPage = 'home';
+        const pages = ['home', 'section1', 'section2', 'section3', 'section4', 'celebration'];
 
-    <div id="joke-time">
-        <p>Now that we have taken a trip down memory lane, I thought it would be nice to have a little fun time, and some funny moments together!</p>
-        <p>Here are some thing that may <strong>crack you up</strong> ...</p>
-        <ul>
-            <li>BUTTER CHICKEN!!!</li>
-            <li>Seven Hundred and Fifty Six</li>
-            <li><strong>Ollie's joke:</strong> I ate a clock last week, it was very time-consuming!</li>
-        </ul>
-    </div>
+        function goToSection(index) {
+            // Hide current page
+            const currentElement = document.getElementById(currentPage);
+            currentElement.classList.remove('active');
 
-    <div id="final-message">
-        <p>So, I hope you have a wonderful birthday, and I hope you have a wonderful day, and I hope you have a wonderful year ahead of you!</p>
-        <p>I love you so much, and I am so grateful to have you as the one and only <strong>BEST</strong> mum!</p>
-        <p>Happy Birthday, Mummy!</p>
-        <h3>Love,</h3>
-        <h4>Your <strong>J</strong>!</h4>
-    </body>
+            // Show next page
+            if (index === 'home') {
+                currentPage = 'home';
+            } else if (index === 'celebration') {
+                currentPage = 'celebration';
+                createCelebration();
+            } else {
+                currentPage = 'section' + index;
+            }
+
+            const nextElement = document.getElementById(currentPage);
+            nextElement.classList.add('active');
+            nextElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function createCelebration() {
+            // Create confetti
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.top = '-10px';
+                confetti.style.width = '10px';
+                confetti.style.height = '10px';
+                confetti.style.background = ['#ff1493', '#ff69b4', '#ffb6d9', '#ffc0cb'][Math.floor(Math.random() * 4)];
+                confetti.style.zIndex = '5';
+                confetti.style.borderRadius = '50%';
+                confetti.style.animation = `confetti-fall ${2 + Math.random() * 2}s ease-out forwards`;
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                document.body.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 4000);
+            }
+        }
+    </script>
+</body>
+
 </html>
