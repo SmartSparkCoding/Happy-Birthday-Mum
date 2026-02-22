@@ -90,7 +90,6 @@ body {
     justify-content: center;
     align-items: center;
     gap: 30px;
-    height: 100vh;
 }
 
 #home h1 {
@@ -172,20 +171,23 @@ body {
 /* Gallery for memories (5 slots) */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     gap: 12px;
     margin-top: 24px;
     justify-items: center;
+    align-items: start;
 }
+/* Photo slot: responsive, keeps aspect ratio */
 .photo {
-    width: 120px;
-    height: 90px;
+    width: 100%;
+    max-width: 160px;
+    aspect-ratio: 4 / 3;
     border-radius: 12px;
     background: linear-gradient(135deg, rgba(255,182,193,0.2), rgba(255,105,180,0.05));
     border: 2px dashed rgba(255,105,180,0.25);
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-    display: block;
     overflow: hidden;
+    display: block;
 }
 /* Images should cover the slot */
 .gallery img.photo {
@@ -226,20 +228,8 @@ body {
     }
 }
 
-#celebration .confetti {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #ff1493;
-    animation: confetti-fall 3s ease-out forwards;
-}
-
-@keyframes confetti-fall {
-    to {
-        opacity: 0;
-        transform: translateY(500px) rotate(360deg);
-    }
-}
+/* Removed old celebration-scoped confetti rules to avoid conflicts.
+   Confetti pieces are styled using the global #confetti-container and .confetti rules further below. */
 
 #celebration .hearts-burst {
     font-size: 3rem;
