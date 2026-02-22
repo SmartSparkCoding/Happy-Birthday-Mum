@@ -9,33 +9,19 @@
 </head>
 
 <body>
-    <!-- Floating Hearts Background -->
-    <div class="hearts-container">
-        <div class="heart">❤️</div>
-        <div class="heart">💕</div>
-        <div class="heart">💖</div>
-        <div class="heart">💗</div>
-        <div class="heart">💝</div>
-        <div class="heart">❤️</div>
-        <div class="heart">💕</div>
-        <div class="heart">💖</div>
-        <div class="heart">💗</div>
-        <div class="heart">💝</div>
-    </div>
 
-    <!-- Main Content -->
     <div class="content-wrapper">
-        <!-- Home Page -->
+        <!-- welcome Message -->
         <div id="home" class="page active">
-            <h1>Happy Birthday, Mum! 💖</h1>
+            <h1>Happy Birthday, Mum!</h1>
             <p>I've put together something special just for you...</p>
-            <button onclick="goToSection(1)">Let's Begin ✨</button>
+            <button onclick="goToSection(1)">Let's Begin</button>
         </div>
 
-        <!-- Section 1: Main Message -->
+        <!-- Section 1 -->
         <div id="section1" class="page">
             <div class="section">
-                <h2>Dear Mummy 💌</h2>
+                <h2>Dear Mummy</h2>
                 <p>On your very special day, I wanted to tell you how much I really love you.</p>
                 <p>You do absolutely everything for me, and I am so grateful for it all. You care for not just me, but Dad, Ollie, Grannie, Grandad, and even Ebony, Bear and Blackjack!</p>
                 <p>Today is YOUR DAY to relax and enjoy.</p>
@@ -45,25 +31,33 @@
             </div>
         </div>
 
-        <!-- Section 2: Memories -->
+        <!-- Section 2 -->
         <div id="section2" class="page">
             <div class="section">
-                <h2>So Many Memories 📸</h2>
+                <h2>So Many Memories</h2>
                 <p>We've done so much together! The beach, the park, the zoo, the cinema, the shops, the library, the museum, the aquarium, the farm...</p>
                 <p>There are too many amazing memories to count! Each moment with you is special and I'll never forget them.</p>
+                <!-- Gallery placeholder for up to 5 images -->
+                <div class="gallery" aria-label="memories-gallery">
+                    <img class="photo" src="images/image1.jpg" alt="Memory photo 1">
+                    <img class="photo" src="images/image2.jpg" alt="Memory photo 2">
+                    <img class="photo" src="images/image3.jpg" alt="Memory photo 3">
+                    <img class="photo" src="images/image4.jpg" alt="Memory photo 4">
+                    <img class="photo" src="images/image5.jpg" alt="Memory photo 5">
+                </div>
             </div>
             <div class="button-container">
                 <button onclick="goToSection(3)">Next →</button>
             </div>
         </div>
 
-        <!-- Section 3: Fun Times -->
+        <!-- Section 3 -->
         <div id="section3" class="page">
             <div class="section">
-                <h2>Time to Laugh! 😄</h2>
+                <h2>Time to Laugh!</h2>
                 <p>Let me share some fun moments with you:</p>
                 <ul>
-                    <li>BUTTER CHICKEN!!! (you know why 🤣)</li>
+                    <li>BUTTER CHICKEN!!! (you know why)</li>
                     <li>Seven Hundred and Fifty Six</li>
                     <li><strong>Ollie's joke:</strong> I ate a clock last week, it was very time-consuming!</li>
                 </ul>
@@ -73,40 +67,39 @@
             </div>
         </div>
 
-        <!-- Section 4: Final Words -->
+        <!-- Section 4 -->
         <div id="section4" class="page">
             <div class="section">
-                <h2>Before the Big Moment 💝</h2>
+                <h2>Before the Big Moment</h2>
                 <p>I hope you have the most wonderful birthday, filled with love and joy.</p>
                 <p>You are the best mum anyone could ask for, and you deserve all the happiness in the world today and every day.</p>
             </div>
             <div class="button-container">
-                <button onclick="goToSection(5)">The Best Part! 🎉</button>
+                <button onclick="goToSection(5)">The Best Part</button>
             </div>
         </div>
 
-        <!-- Celebration Page -->
+        <!-- final celebration bit -->
         <div id="celebration" class="page">
-            <h1>HAPPY BIRTHDAY, MUM! 🎉</h1>
-            <div style="font-size: 4rem; animation: burst-out 1s ease-out;">
-                💕 💖 💗 💝 ❤️
-            </div>
+            <h1 id="celebration-text" aria-live="polite"></h1>
+            <div id="confetti-container" aria-hidden="true"></div>
         </div>
     </div>
 
     <script>
+
         let currentPage = 'home';
         const pages = ['home', 'section1', 'section2', 'section3', 'section4', 'celebration'];
 
         function goToSection(index) {
             // Hide current page
             const currentElement = document.getElementById(currentPage);
-            currentElement.classList.remove('active');
+            if (currentElement) currentElement.classList.remove('active');
 
-            // Show next page
+            // Show next page (treat 5 as celebration)
             if (index === 'home') {
                 currentPage = 'home';
-            } else if (index === 'celebration') {
+            } else if (index === 'celebration' || index === 5) {
                 currentPage = 'celebration';
                 createCelebration();
             } else {
@@ -114,27 +107,36 @@
             }
 
             const nextElement = document.getElementById(currentPage);
-            nextElement.classList.add('active');
-            nextElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (nextElement) {
+                nextElement.classList.add('active');
+                nextElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
         }
 
         function createCelebration() {
-            // Create confetti
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.left = Math.random() * 100 + '%';
-                confetti.style.top = '-10px';
-                confetti.style.width = '10px';
-                confetti.style.height = '10px';
-                confetti.style.background = ['#ff1493', '#ff69b4', '#ffb6d9', '#ffc0cb'][Math.floor(Math.random() * 4)];
-                confetti.style.zIndex = '5';
-                confetti.style.borderRadius = '50%';
-                confetti.style.animation = `confetti-fall ${2 + Math.random() * 2}s ease-out forwards`;
-                confetti.style.animationDelay = Math.random() * 0.5 + 's';
-                document.body.appendChild(confetti);
+            // Animated text
+            const textEl = document.getElementById('celebration-text');
+            const text = 'Happy Birthday, Mum!';
+            textEl.innerHTML = '';
+            for (let i = 0; i < text.length; i++) {
+                const span = document.createElement('span');
+                span.textContent = text[i];
+                span.className = 'birthday-letter';
+                span.style.animationDelay = (i * 0.05) + 's';
+                textEl.appendChild(span);
+            }
 
-                setTimeout(() => confetti.remove(), 4000);
+            // Confetti
+            const container = document.getElementById('confetti-container');
+            container.innerHTML = '';
+            for (let i = 0; i < 80; i++) {
+                const c = document.createElement('div');
+                c.className = 'confetti';
+                c.style.left = Math.random() * 100 + '%';
+                c.style.background = ['#ff1493', '#ff69b4', '#ffb6d9', '#ffc0cb', '#ffd700'][Math.floor(Math.random() * 5)];
+                c.style.animationDelay = (Math.random() * 1.5) + 's';
+                container.appendChild(c);
+                setTimeout(() => c.remove(), 5000);
             }
         }
     </script>
